@@ -41,6 +41,7 @@ const Logueo = () => {
             signInWithEmailAndPassword(auth, email, password)
             .then (userCredential=> {
                 setUser(userCredential.user.email)
+                localStorage.setItem("user",userCredential.user.email)
                 navigate ("/home")
             })
             .catch ((error) => {
@@ -69,14 +70,16 @@ const Logueo = () => {
 
     function LoginGoogleSignIn (e) {
         signInWithRedirect (auth, googleProvider)
+        // localStorage.setItem("user",userCredential.user.email)
         navigate ("/home")
     }
 
     return (
-
-    <div className="w-full max-w-xs m-auto object-center font-LouisGeorge">
-        <h1>{estaRegistrandose ? "Registrate" : "Inicia Sesión"}</h1>
-        <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div className="w-full h-screen bg-no-repeat bg-cover bg-left bg-fixed bg-fondoEureka">
+    <div className="w-100px max-w-sm m-auto object-center font-LouisGeorge bg-white shadow-md rounded-2xl px-11 pt-7 pb-16">
+        <img src="https://i.postimg.cc/25nnGRcy/2.png" className="w-9/12 w-full"></img>
+        <h1 className= "text-sky-400 pt-5">{estaRegistrandose ? "Registrate" : "Inicia Sesión"}</h1>
+        <form onSubmit={submitHandler} className= "pt-2 mb-4 align-content: center">
             <div className="mb-4">
                 <input
                     type="text"
@@ -98,7 +101,7 @@ const Logueo = () => {
 
             <div className="flex items-center justify-between">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-sky-500 hover:bg-black text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline "
                     type="submit"
                 >
                 {estaRegistrandose ? "Registrate" : "Inicia Sesión"}
@@ -108,20 +111,21 @@ const Logueo = () => {
         </form>
 
         <button
-            className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
+            className="bg-slate-50 hover:bg-slate-200 text-black shadow rounded border-2 border-gray-300 py-2 px-4 w-full flex items-center"
             type="submit"
             onClick={LoginGoogleSignIn}
-            >
+            ><img src="https://i.postimg.cc/0jVGF0ND/logo-Gmail.png"></img>
             Acceder con Google
         </button>
 
         <button
-            className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
+            className="font-louisGeorge font-bold text-center text-sky-400 py-2 px-4 w-full"
             onClick={() => setEstaregistrandose(!estaRegistrandose)}
             >
-            {estaRegistrandose ? "¿Ya tienes cuenta? Inicia Sesión" : "¿No tienes cuenta? Registrate"}
+            {estaRegistrandose ? "¿Ya tienes cuenta?\nInicia Sesión" : "¿No tienes cuenta?\nRegistrate"}
         </button>
 
+    </div>
     </div>
     );
 
